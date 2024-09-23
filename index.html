@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>My AngularJS App</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com">
+    <script src="app.js"></script>
+    <script src="controllers/loginController.js"></script>
+</head>
+<body>
+    <div ng-controller="loginController" id="loginController">
+        <img src="images/logo.png" alt="App Logo" class="logo">
+        <h1>{{ message }}</h1>
+        <div ng-show="!isSignedIn">
+            <form name="loginForm" ng-submit="login()">
+                <input type="email" ng-model="user.email" placeholder="Email" required>
+                <input type="password" ng-model="user.password" placeholder="Password" required ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/">
+                <span ng-show="loginForm.password.$error.pattern">Password must be at least 8 characters long and contain at least one letter and one number.</span>
+                <button type="submit">Sign In</button>
+            </form>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        </div>
+        <div ng-show="isSignedIn">
+            <button ng-click="signOut()">Sign Out</button>
+        </div>
+    </div>
+    <script>
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            angular.element(document.getElementById('loginController')).scope().$apply(function(scope) {
+                scope.user = {
+                    id: profile.getId(),
+                    name: profile.getName(),
+                    imageUrl: profile.getImageUrl(),
+                    email: profile.getEmail()
+                };
+                scope.isSignedIn = true;
+                scope.message = "Hello, " + scope.user.name;
+            });
+        }
+    </script>
+</body>
+</html>
