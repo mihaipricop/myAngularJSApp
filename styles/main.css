@@ -2,61 +2,75 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #fff;
+  background-color: #e0e0e0;
 }
 
 .header, .footer {
-  background-color: #f0f0f0;
+  background-color: #f8f8f8;
   padding: 10px;
   text-align: center;
-  border: 1px solid #ccc;
+  box-shadow: inset 2px 2px 5px #aaa, inset -2px -2px 5px #fff;
+  border-radius: 10px;
+  margin: 10px;
 }
 
 .login-container, .form-container, .dashboard-container {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
-  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px #aaa, -5px -5px 15px #fff;
 }
 
 h2 {
   text-align: center;
   color: #333;
+  text-shadow: 1px 1px 2px #aaa;
 }
 
 label {
   display: block;
   margin: 10px 0 5px;
   color: #333;
+  text-shadow: 1px 1px 2px #aaa;
 }
 
 input {
   width: 100%;
+  max-width: 300px;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 2px 2px 5px #aaa, inset -2px -2px 5px #fff;
+  background-color: #e0e0e0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 button {
   width: 100%;
+  max-width: 300px;
   padding: 10px;
-  background-color: #ccc;
-  color: #333;
-  border: 1px solid #999;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #aaa, -2px -2px 5px #fff;
   cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 button:hover {
-  background-color: #bbb;
+  background-color: #45a049;
 }
 
 p {
   color: red;
   text-align: center;
-}
-
-ul {
-  color: red;
-  list-style-type: none;
-  padding: 0;
+  text-shadow: 1px 1px 2px #aaa;
 }
