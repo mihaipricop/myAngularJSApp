@@ -1,41 +1,62 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
 }
-h1 {
-    color: #333;
+
+.header, .footer {
+  background-color: #f0f0f0;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
 }
-.g-signin2 {
-    margin: 20px 0;
+
+.login-container, .form-container, .dashboard-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
 }
-button {
-    background-color: #4285f4;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
+
+h2 {
+  text-align: center;
+  color: #333;
 }
-button:hover {
-    background-color: #357ae8;
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+  color: #333;
 }
-form {
-    margin: 20px 0;
-}
+
 input {
-    padding: 10px;
-    margin: 5px;
-    font-size: 16px;
-    width: 80%;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
 }
-input.ng-invalid.ng-touched {
-    border-color: red;
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ccc;
+  color: #333;
+  border: 1px solid #999;
+  cursor: pointer;
 }
-.logo {
-    width: 150px;
-    margin-bottom: 20px;
+
+button:hover {
+  background-color: #bbb;
+}
+
+p {
+  color: red;
+  text-align: center;
+}
+
+ul {
+  color: red;
+  list-style-type: none;
+  padding: 0;
 }

@@ -4,43 +4,63 @@
     <meta charset="UTF-8">
     <title>My AngularJS App</title>
     <link rel="stylesheet" href="styles/main.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com">
-    <script src="app.js"></script>
-    <script src="controllers/loginController.js"></script>
 </head>
-<body>
-    <div ng-controller="loginController" id="loginController">
-        <img src="images/logo.png" alt="App Logo" class="logo">
+
+<body ng-controller="MainController">
+    <!-- Login View -->
+    <div class="login-container" ng-show="currentView === 'login'">
         <h1>{{ message }}</h1>
-        <div ng-show="!isSignedIn">
-            <form name="loginForm" ng-submit="login()">
-                <input type="email" ng-model="user.email" placeholder="Email" required>
-                <input type="password" ng-model="user.password" placeholder="Password" required ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/">
-                <span ng-show="loginForm.password.$error.pattern">Password must be at least 8 characters long and contain at least one letter and one number.</span>
-                <button type="submit">Sign In</button>
-            </form>
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        </div>
-        <div ng-show="isSignedIn">
-            <button ng-click="signOut()">Sign Out</button>
-        </div>
+        <form name="loginForm" ng-submit="login()">
+            <label for="email">Email:</label>
+            <input type="email" id="email" ng-model="user.email" placeholder="Email" required autocomplete="username">
+            <label for="password">Password:</label>
+            <input type="password" id="password" ng-model="user.password" required ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" autocomplete="current-password">
+            <span ng-show="loginForm.password.$error.pattern">Password must be at least 8 characters long and contain at least one letter and one number.</span>
+            <button type="submit">Sign In</button>
+        </form>
+        <p ng-if="errorMessage">{{errorMessage}}</p>
     </div>
-    <script>
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            angular.element(document.getElementById('loginController')).scope().$apply(function(scope) {
-                scope.user = {
-                    id: profile.getId(),
-                    name: profile.getName(),
-                    imageUrl: profile.getImageUrl(),
-                    email: profile.getEmail()
-                };
-                scope.isSignedIn = true;
-                scope.message = "Hello, " + scope.user.name;
-            });
-        }
-    </script>
+
+    <!-- Dashboard View -->
+        <div class="dashboard-container" ng-show="currentView === 'dashboard'">
+            <h2>Welcome, {{username}}!</h2>
+            <button ng-click="goToForm()">Go to Data Submission Form</button>
+            <button ng-click="logout()">Logout</button>
+        </div>
+
+  <!-- Data Submission Form View -->
+  <div class="form-container" ng-show="currentView === 'dataForm'">
+    <h2>Data Submission Form</h2>
+    <form ng-submit="submitData()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" ng-model="data.name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" ng-model="data.email" required>
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" ng-model="data.phone" required>
+      <label for="address">Address:</label>
+      <input type="text" id="address" ng-model="data.address" required>
+      <label for="course">Course:</label>
+      <input type="text" id="course" ng-model="data.course" required>
+      <label for="semester">Semester:</label>
+      <input type="text" id="semester" ng-model="data.semester" required>
+      <label for="year">Year:</label>
+      <input type="number" id="year" ng-model="data.year" required>
+      <button type="submit">Submit</button>
+    </form>
+    <p ng-if="successMessage">{{successMessage}}</p>
+    <ul ng-if="validationErrors.length > 0">
+      <li ng-repeat="error in validationErrors">{{error}}</li>
+    </ul>
+  </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+    <!-- <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"> -->
+    <script src="app.js"></script>
+    <script src="controllers/mainController.js"></script>
+    <script src="controllers/loginController.js"></script>
+    <script src="services/loginService.js"></script>
+    <script src="services/dataService.js"></script>
 </body>
 </html>
